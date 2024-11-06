@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Long Polling Example</title>
+</head>
+<body>
+<h2>Long Polling</h2>
+<div id="longStatus">Waiting for data...</div>
+
+<script>
+    function fetchLongPollingData() {
+        fetch('/status/long-polling')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("longStatus").innerText = `Status: ${data.status} at ${data.timestamp}`;
+                // Restart long polling after receiving data
+                fetchLongPollingData();
+            });
+    }
+
+    fetchLongPollingData();  // Initiate long polling on load
+</script>
+</body>
+</html>

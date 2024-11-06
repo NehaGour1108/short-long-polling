@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Short Polling Example</title>
+</head>
+<body>
+<h2>Short Polling</h2>
+<div id="status">Loading...</div>
+
+<script>
+    function fetchShortPollingData() {
+        fetch('/status/short-polling')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("status").innerText = `Status: ${data.status} at ${data.timestamp}`;
+            });
+    }
+
+    // Poll every 5 seconds
+    setInterval(fetchShortPollingData, 5000);
+</script>
+</body>
+</html>
